@@ -1,0 +1,86 @@
+{
+	"name": "Kong POC container",
+	"build": {
+		"context": "..",
+		"dockerfile": "./Dockerfile.devcontainer",
+		"args": {
+			// "BUILDKIT_INLINE_CACHE": "0",
+			"VERSION": "0-18"
+		}
+	},
+	"features": {
+		// "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},		
+		"ghcr.io/rio/features/k3d:1": {},
+		"ghcr.io/dapr/cli/dapr-cli:0": {},
+		"ghcr.io/jckimble/devcontainer-features/ngrok:3": {},
+		"ghcr.io/devcontainers/features/python:1": {}
+	},
+	"overrideFeatureInstallOrder": [
+		// "ghcr.io/devcontainers/features/docker-outside-of-docker",
+		"ghcr.io/devcontainers/features/docker-in-docker",
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube",
+		"ghcr.io/rio/features/k3d",
+		"ghcr.io/dapr/cli/dapr-cli",
+		"ghcr.io/jckimble/devcontainer-features/ngrok",
+		"ghcr.io/devcontainers/features/python"
+	],
+	"mounts": [
+		{
+			"source": "projectname-bashhistory",
+			"target": "/commandhistory",
+			"type": "volume"
+		},
+		// Mount docker-in-docker library volume
+		{
+			"source": "projectname-docker-in-docker",
+			"target": "/var/lib/docker",
+			"type": "volume"
+		},
+		{
+			// "source": "${env:HOME}/.kube",
+			"source": "${localEnv:HOME}${localEnv:USERPROFILE}/.kube",
+			"target": "/home/node/.kube",
+			"type": "bind"
+		},
+		{
+			// "source": "${env:HOME}/.poc",
+			"source": "${localEnv:HOME}${localEnv:USERPROFILE}/.poc",
+			"target": "/home/node/.poc",
+			"type": "bind"
+		}
+	],
+	"runArgs": [
+		"--env-file=${localEnv:HOME}${localEnv:USERPROFILE}/.poc/config.env",
+		"--env-file=${localEnv:HOME}${localEnv:USERPROFILE}/.poc/secret.env",
+		// Enable docker-in-docker configuration
+		"--init",
+		"--privileged"
+	],
+	"initializeCommand": "bash .devcontainer/scripts/initialize.sh",
+	"onCreateCommand": ".devcontainer/scripts/on-create.sh || true",
+	"updateContentCommand": ".devcontainer/scripts/update-content.sh || true",
+	"postCreateCommand": ".devcontainer/scripts/post-create.sh || true",
+	"postStartCommand": ".devcontainer/scripts/post-start.sh || true",
+	"postAttachCommand": ".devcontainer/scripts/post-attach.sh || true",
+	// "remoteEnv": {
+	// 	"HOST_HOME": "${env:HOME}"
+	// },
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"settings": {
+			},
+			"extensions": [
+				"ms-kubernetes-tools.vscode-kubernetes-tools",
+				"humao.rest-client",
+				"ms-azuretools.vscode-dapr",
+				"mindaro.mindaro"
+			]
+		}
+	}
+
+	// "remoteUser": "node"
+}
