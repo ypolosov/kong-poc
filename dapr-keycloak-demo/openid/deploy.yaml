@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goechoapp
+  labels:
+    app: goecho
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: goecho
+  template:
+    metadata:
+      labels:
+        app: goecho
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "goechoapp"
+        dapr.io/app-port: "3000"
+        dapr.io/config: "pipelineodic"
+        dapr.io/log-as-json: "true"
+        dapr.io/log-level: "debug"
+        dapr.io/sidecar-listen-addresses: "0.0.0.0"
+    spec:
+      containers:
+      - name: goecho
+        image: docker.io/akoserwal/goechoapp:latest
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: goechoapp
+  labels:
+    app: goecho
+spec:
+  selector:
+    app: goecho
+  ports:
+  - protocol: TCP
+    port: 3000
+  type: LoadBalancer
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: goecho
+  labels:
+    app: goecho
+spec:
+  rules:
+    - host: echo-api.127.0.0.1.nip.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: goechoapp-dapr
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

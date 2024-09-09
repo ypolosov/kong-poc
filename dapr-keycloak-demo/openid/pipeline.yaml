@@ -1,0 +1,9 @@
+apiVersion: dapr.io/v1alpha1
+kind: Configuration
+metadata:
+  name: pipelineodic
+spec:
+  httpPipeline:
+    handlers:
+    - name: bearer-token
+      type: middleware.http.bearer

@@ -1,0 +1,12 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gateway-dapr-dashboard
+  namespace: dapr-system
+spec:
+  gatewayClassName: nginx
+  listeners:
+  - name: foobar
+    port: 9999
+    protocol: HTTP
+    hostname: "localhost"

@@ -1,0 +1,14 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: bearer-token
+spec:
+  type: middleware.http.bearer
+  version: v1
+  metadata:
+  - name: clientId
+    value: "dapr-openid-demo"
+  - name: issuerURL
+    value: "https://40ed-49-36-24-37.ngrok-free.app/realms/demo"
+  - name: jwksURL
+    value: "https://40ed-49-36-24-37.ngrok-free.app/realms/demo/protocol/openid-connect/certs"

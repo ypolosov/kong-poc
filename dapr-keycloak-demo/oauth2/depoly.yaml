@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oauthechoapp
+  labels:
+    app: oauthecho
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oauthecho
+  template:
+    metadata:
+      labels:
+        app: oauthecho
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "oauthechoapp"
+        dapr.io/app-port: "3000"
+        dapr.io/config: "pipelineoauth"
+        dapr.io/log-as-json: "true"
+        dapr.io/log-level: "debug"
+        dapr.io/sidecar-listen-addresses: "0.0.0.0"
+    spec:
+      containers:
+      - name: goecho
+        image: docker.io/akoserwal/goechoapp:latest
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  oauthechoapp
+  labels:
+    app:  oauthecho
+spec:
+  selector:
+    app: oauthecho
+  ports:
+  - protocol: TCP
+    port: 3000
+  type: LoadBalancer
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name:  oauthecho
+  labels:
+    app:  oauthecho
+spec:
+  rules:
+    - host: oauthecho-api.127.0.0.1.nip.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: oauthechoapp-dapr
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

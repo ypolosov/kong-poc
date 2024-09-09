@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clientcredechoapp
+  labels:
+    app: clientcredecho
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clientcredecho
+  template:
+    metadata:
+      labels:
+        app: clientcredecho
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "clientcredechoapp"
+        dapr.io/app-port: "3000"
+        dapr.io/config: "pipelineoauthclientcred"
+        dapr.io/log-as-json: "true"
+        dapr.io/log-level: "debug"
+        dapr.io/sidecar-listen-addresses: "0.0.0.0"
+    spec:
+      containers:
+      - name: goecho
+        image: docker.io/akoserwal/goechoapp:latest
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  clientcredechoapp
+  labels:
+    app:  clientcredecho
+spec:
+  selector:
+    app: clientcredecho
+  ports:
+  - protocol: TCP
+    port: 3000
+  type: LoadBalancer
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name:  clientcredecho
+  labels:
+    app:  clientcredecho
+spec:
+  rules:
+    - host: clientcredecho-api.127.0.0.1.nip.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: clientcredechoapp-dapr
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
