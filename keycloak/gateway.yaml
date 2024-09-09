@@ -1,15 +1,15 @@
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
-metadata:
-  name: keycloak
-  namespace: keycloak
-spec:
-  gatewayClassName: nginx
-  listeners:
-  - name: http
-    port: 80
-    protocol: HTTP
-    # hostname: "localhost"
-    # allowedRoutes:
-    #   namespaces:
-    #     from: All
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: Gateway
+# metadata:
+#   name: keycloak
+#   namespace: keycloak
+# spec:
+#   gatewayClassName: kong
+#   listeners:
+#   - name: http
+#     port: 80
+#     protocol: HTTP
+#     hostname: "*.keycloak.127.0.0.1.nip.io"
+#     # allowedRoutes:
+#     #   namespaces:
+#     #     from: All

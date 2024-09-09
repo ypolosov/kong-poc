@@ -1,22 +1,15 @@
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
-metadata:
-  name: cafe
-  namespace: coffee
-spec:
-  gatewayClassName: nginx
-  listeners:
-  - name: http
-    port: 80
-    protocol: HTTP
-    # hostname: "localhost"
-    # allowedRoutes:
-    #   namespaces:
-    #     from: All
-  - name: https
-    port: 443
-    protocol: HTTPS
-    # hostname: "*.127.0.0.1.nip.io"
-    # allowedRoutes:
-    #   namespaces:
-    #     from: All
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: Gateway
+# metadata:
+#   name: cafe
+#   namespace: coffee
+# spec:
+#   gatewayClassName: kong
+#   listeners:
+#   - name: http
+#     port: 80
+#     protocol: HTTP
+#     hostname: "*.cafe.127.0.0.1.nip.io"
+#     # allowedRoutes:
+#     #   namespaces:
+#     #     from: All

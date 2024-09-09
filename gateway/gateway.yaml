@@ -1,15 +1,15 @@
 # apiVersion: gateway.networking.k8s.io/v1
 # kind: Gateway
 # metadata:
-#   name: dapr
-#   namespace: dapr-system
+#   name: gateway
+#   namespace: default
 # spec:
-#   gatewayClassName: nginx
+#   gatewayClassName: kong
 #   listeners:
 #   - name: http
 #     port: 80
 #     protocol: HTTP
-#     hostname: "*.dapr.127.0.0.1.nip.io"
+#     # hostname: "*.127.0.0.1.nip.io"
 #     allowedRoutes:
 #       namespaces:
 #         from: All

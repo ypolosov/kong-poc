@@ -21,3 +21,15 @@ dapr init --kubernetes
 
 helm repo add dapr https://dapr.github.io/helm-charts/
 helm repo update
+
+-------------------
+
+kubectl apply -f gateway
+kubectl apply -f keycloak
+kubectl apply -f dapr
+kubectl apply -f test-app
+
+kubectl delete -f gateway
+kubectl delete -f keycloak
+kubectl delete -f dapr
+kubectl delete -f test-app
