@@ -1,12 +1,14 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: keycloak-route
+  name: keycloak-http
   namespace: keycloak
 spec:
   parentRefs:
-  - name: keycloak-gateway
+  - name: keycloak
     sectionName: http
+  hostnames:
+  - keycloak.127.0.0.1.nip.io
   rules:
   - matches:
     - path:

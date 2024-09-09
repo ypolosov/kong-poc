@@ -9,10 +9,10 @@ spec:
     sectionName: http
   hostnames:
   - coffee.127.0.0.1.nip.io
-  - cafe.example.com
-  - 127.0.0.1
-  - "localhost"
-  - "kubernetes.docker.internal"
+  # - cafe.example.com
+  # - 127.0.0.1
+  # - "localhost"
+  # - "kubernetes.docker.internal"
   rules:
   - matches:
     - path:

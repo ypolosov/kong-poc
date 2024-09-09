@@ -10,13 +10,13 @@ spec:
     port: 80
     protocol: HTTP
     # hostname: "localhost"
-    allowedRoutes:
-      namespaces:
-        from: All
+    # allowedRoutes:
+    #   namespaces:
+    #     from: All
   - name: https
     port: 443
     protocol: HTTPS
     # hostname: "*.127.0.0.1.nip.io"
-    allowedRoutes:
-      namespaces:
-        from: All
+    # allowedRoutes:
+    #   namespaces:
+    #     from: All
