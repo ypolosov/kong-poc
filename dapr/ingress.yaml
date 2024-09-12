@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: ingress-dapr
   namespace: dapr-system
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - host: dashboard.dapr.127.0.0.1.nip.io

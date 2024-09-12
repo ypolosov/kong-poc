@@ -2,20 +2,21 @@ apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
   name: oauth2client
+  namespace: clientcred-demo
 spec:
   type: middleware.http.oauth2clientcredentials
   version: v1
   metadata:
   - name: clientId
-    value: "dapr-client-cred"
+    value: "myclient"
   - name: clientSecret
-    value: "ah7qDLzVs4YXAe8bUFNHhSJn90J0W0Ai"
+    value: "cwqQpgHx4QzX7eN3jtzYrHPnJs83rvgu"
   - name: scopes
     value: "openid profile"
   - name: authURL
-    value: "https://40ed-49-36-24-37.ngrok-free.app/realms/demo/protocol/openid-connect/auth"
+    value: "https://dashboard.keycloak.127.0.0.1.nip.io/realms/demo/protocol/openid-connect/auth"
   - name: tokenURL
-    value: "https://40ed-49-36-24-37.ngrok-free.app/realms/demo/protocol/openid-connect/token"
+    value: "https://dashboard.keycloak.127.0.0.1.nip.io/realms/demo/protocol/openid-connect/token"
   - name: redirectURL
     value: "http://clientcredecho-api.127.0.0.1.nip.io"
   - name: headerName

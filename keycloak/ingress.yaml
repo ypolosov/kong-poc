@@ -4,6 +4,9 @@ metadata:
   name: ingress-keycloak
   namespace: keycloak
 spec:
+  tls:
+    - hosts:
+        - dashboard.keycloak.127.0.0.1.nip.io
   rules:
   - host: dashboard.keycloak.127.0.0.1.nip.io
     http:
@@ -12,7 +15,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: keycloak-http
+            name: keycloak
             port:
-              number: 80
+              number: 8080
   ingressClassName: nginx

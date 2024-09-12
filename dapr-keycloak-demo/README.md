@@ -16,3 +16,12 @@ Demo
 * [oauth2 middleware](/oauth2/README.md)
 * [oauth2 client credentials middleware](/oauth2/README.md)
 * [oauth2 openid middleware](/openid/README.md)
+
+
+
+
+---------------
+https://readmedium.com/how-to-load-the-local-docker-image-in-kind-kubernetes-cluster-a21f0b8327ba
+
+# troubleshooting (Pod Stuck in ImagePullBackOff)
+docker pull akoserwal/goechoapp

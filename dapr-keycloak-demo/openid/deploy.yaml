@@ -1,7 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openid-demo
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: goechoapp
+  namespace: openid-demo
   labels:
     app: goecho
 spec:
@@ -18,8 +24,8 @@ spec:
         dapr.io/app-id: "goechoapp"
         dapr.io/app-port: "3000"
         dapr.io/config: "pipelineodic"
-        dapr.io/log-as-json: "true"
-        dapr.io/log-level: "debug"
+        # dapr.io/log-as-json: "true"
+        # dapr.io/log-level: "debug"
         dapr.io/sidecar-listen-addresses: "0.0.0.0"
     spec:
       containers:
@@ -33,6 +39,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: goechoapp
+  namespace: openid-demo
   labels:
     app: goecho
 spec:
@@ -41,13 +48,14 @@ spec:
   ports:
   - protocol: TCP
     port: 3000
-  type: LoadBalancer
+  # type: LoadBalancer
 
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: goecho
+  namespace: openid-demo
   labels:
     app: goecho
 spec:
@@ -62,3 +70,4 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
+  ingressClassName: nginx

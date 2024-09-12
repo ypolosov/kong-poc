@@ -2,6 +2,7 @@ apiVersion: dapr.io/v1alpha1
 kind: Configuration
 metadata:
   name: pipelineoauthclientcred
+  namespace: clientcred-demo
 spec:
   # tracing:
   #   samplingRate: "1"

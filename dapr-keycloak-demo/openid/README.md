@@ -1,8 +1,6 @@
-`kubectl create namespace openid-demo`
-
-`kubectl apply -f openid.yaml -n openid-demo`
-`kubectl apply -f pipeline.yaml -n openid-demo`
-`kubectl apply -f deploy.yaml -n openid-demo`
+kubectl apply -f openid.yaml
+kubectl apply -f pipeline.yaml
+kubectl apply -f deploy.yaml
 
 Set the keycloak url, clientid and client secret in token.sh
 
@@ -10,7 +8,7 @@ Set the keycloak url, clientid and client secret in token.sh
 
 curl --location 'http://echo-api.127.0.0.1.nip.io/v1.0/invoke/goechoapp/method/echo?text=hello' \
 --header 'Content-Type: application/json' \
---header "Authorization: Bearer ${5}" \
+--header "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI3eG1tWDRlRVRrYUdWWjdMdTAzWkJaRFUtcnpzLVYwbWpabXY5VUhqcmZjIn0.eyJleHAiOjE3MjYwNDY1MDcsImlhdCI6MTcyNjA0NjIwNywianRpIjoiMjM4ZDFjN2QtOWUzMi00OTI3LWJjMGUtOGViMDM2OGZlMmJlIiwiaXNzIjoiaHR0cHM6Ly9kYXNoYm9hcmQua2V5Y2xvYWsuMTI3LjAuMC4xLm5pcC5pby9yZWFsbXMvZGVtbyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIzODBlMWM1OC02NDAzLTRiNTEtOWYyOS0zMzFhNDRlZmY3OGQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJteWNsaWVudCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL29hdXRoZWNoby1hcGkuMTI3LjAuMC4xLm5pcC5pbyJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImRlZmF1bHQtcm9sZXMtZGVtbyJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsImNsaWVudEhvc3QiOiIxOTIuMTY4LjY1LjMiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1teWNsaWVudCIsImNsaWVudEFkZHJlc3MiOiIxOTIuMTY4LjY1LjMiLCJjbGllbnRfaWQiOiJteWNsaWVudCJ9.XSWOC0AFhMPlabW4guuRcWZGFwrt1BNEkrB97nHvQ8ZIFP4JM36jgp3jHyKSj7oBG6tEYWTq80OL-dgrP3ijcaAAav1mneL5OTu9lZdB9u5pzY-SD_QOZeutm_BerGgLmS0zFFLSJewAUTrUN16kP5nS2QMnIq2QdBGHIYA9UYr6OJLc0Kp1I8VxmsNvpXUdTXIojAviFuCcaRy5-v643KpzdR8BVe5OYXLozgxhQIYI0Hc5brNo5RU_IzFkypf7kuNV5HTSFcsrZXsNmcIvZDVgsxX7UpRw5dwUNH0VO23hL_57FZOiw5KOd4ESlOXghw-MsbShLPUmwabzdiTojg" \
 --data '{
     "test":"tee"
 }'
